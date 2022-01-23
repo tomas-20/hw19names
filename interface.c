@@ -23,9 +23,11 @@ int main() {
   int interface_to_worker = open("interface_to_worker", O_WRONLY);
   int worker_to_interface = open("worker_to_interface", O_RDONLY);
   char line[1000];
-  get_input(line, sizeof line);
-  write(interface_to_worker, line, sizeof line);
-  read(worker_to_interface, line, sizeof line);
-  printf("[%s]\n", line);
+  while (1) {
+    get_input(line, sizeof line);
+    write(interface_to_worker, line, sizeof line);
+    read(worker_to_interface, line, sizeof line);
+    printf("[%s]\n", line);
+  }
   return 0;
 }
